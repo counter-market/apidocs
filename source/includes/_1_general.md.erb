@@ -1,0 +1,48 @@
+# General
+
+We are providing our API as a Restfull web service. We use JSON as a primary data format for our service.
+
+<aside class="notice">
+  Note you should use `Content-Type: application/json` HTTP header
+</aside>
+
+Server responses with `200 OK` HTTP Status for every request proceed well and with `400 Bad Request` otherwise.
+The body of failed response contains data required for explanation and debugging.
+
+# Architectural conventions
+
+For each token we name `pennie` the minimal fraction of this token. For ETH it is WEI.
+
+So, 1 ETH is equal to 10^18 WEI. The exponent of 10 for number of pennies for the token we name `decimalPlaces` of that token.
+
+Each [Token](#token) has a `code` - the special number identificator assigned to this token by us. ???
+
+# Authentication
+
+> Example of how to sign the `hello message` to produce `authorization token`
+
+```javascript
+web3.eth.getAccounts(function getAccountsCallback(error, accounts) {
+  var from = accounts[0];
+  var data = [
+    { type: 'string', name: 'hello', value: 'counter' }
+  ];
+  web3.currentProvider.sendAsync({
+    from: from,
+    method: 'eth_signTypedData',
+    params: [data, from],
+  }, function sendAsyncCallback(error, result) {
+    alert(result.result);
+  });
+});
+```
+
+Use ethereum signature of <code>{ hello: 'counter' }</code> as an `authorization key`
+
+<aside class="notice">
+  Note you should use `Authorization: YOUR-AUTHORIZATION-KEY` HTTP header
+</aside>
+
+<aside class="notice">
+  You should use one of the addresses you have linked to your <%= data.urls.front %> account through website earlier.
+</aside>

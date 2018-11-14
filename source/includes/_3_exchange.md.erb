@@ -1,0 +1,26 @@
+# Exchange
+
+## Get tokens
+
+> CURL
+
+```shell
+curl "<%= data.urls.arbiter %>/tokens"
+  -X GET
+  -H "Authorization: YOUR-AUTHORIZATION-KEY"
+  -H "Content-Type: application/json"
+```
+
+This endpoint returns all tokens which can be traded on our platform.
+
+### HTTP Request
+
+`GET <%= data.urls.arbiter %>/tokens`
+
+### HTTP JSON Response
+
+List of [Token](#token)s:
+
+[
+  [Token](#token), ...
+]

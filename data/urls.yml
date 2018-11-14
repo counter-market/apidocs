@@ -1,0 +1,2 @@
+front: http://staging.counter.market:8001/client/
+arbiter: http://staging.counter.market:8006

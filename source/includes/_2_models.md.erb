@@ -2,7 +2,29 @@
 
 ## Token
 
+Token trading on our exchange
+
+```javascript
+{
+  code: 0
+  symbol: "ETH"
+  name: "Ethereum"
+  decimalPlaces: 18
+  contractAddress: null
+}
+```
+
+Attribute | Type | Description
+--------- | ---- | -----------
+code | number | Token code
+symbol | string | Token ticker symbol
+name| string | Token name
+decimalPlaces | number | number of pennies in 1 token coin. (i.e 1 ETH = 10^18 of WEI so for ETH decimalPlaces = 18)
+contractAddress | string / null | for ERC-20 tokens: token's smart contract address, for ETH: null
+
 ## Trade
+
+Market's trade
 
 ```javascript
 {
@@ -32,6 +54,8 @@ taker | string | taker's eth address
 
 ## Order book
 
+Market's orderbook entity. Stock amount is equal to sum of all order's volumes of given type in given cash price range.
+
 ```javascript
 {
   minCashPriceE8: "0xde0b6b3a7640000",
@@ -52,7 +76,7 @@ type | string (buy | sell) | Order type
 
 ```javascript
 {
-  id: "123a",
+  id: "123abcdef",
   cashToken: {},
   stockToken: {},
   type: "buy",
@@ -79,9 +103,11 @@ createdAt | string | Creation timestamp: `YYYY-MM-DD HH:mm:ss`
 
 ## Token Account
 
+Each wallet has few fundings in several of the tokens trading on the platform. We name such a relation as a `Token Account`
+
 ```javascript
 {
-  id: "123a",
+  id: "123abcdef",
   token: {},
   totalAmount: "0xde0b6b3a7640000",
   total-amount: "0xde0b6b3a7640000",

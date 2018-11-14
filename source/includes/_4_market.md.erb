@@ -1,0 +1,91 @@
+# Market
+
+## Get trades
+
+> CURL
+
+```shell
+curl "<%= data.urls.arbiter %>/market/DAI/ETH/trades"
+  -X GET
+  -H "Authorization: YOUR-AUTHORIZATION-KEY"
+  -H "Content-Type: application/json"
+```
+
+This endpoint returns market's trades
+
+### HTTP Request
+
+`GET <%= data.urls.arbiter %>/market/<StockTokenSymbol>/<CashTokenSymbol>/trades`
+
+### HTTP JSON Response
+
+List of [Trade](#trade)s:
+
+[
+  [Trade](#trade), ...
+]
+
+## Get orderbook
+
+> CURL
+
+```shell
+curl "<%= data.urls.arbiter %>/market/DAI/ETH/orderbook/sell"
+  -X GET
+  -H "Authorization: YOUR-AUTHORIZATION-KEY"
+  -H "Content-Type: application/json"
+```
+
+This endpoint returns current orderbook of the market.
+
+### HTTP Request
+
+`GET <%= data.urls.arbiter %>/market/<StockTokenSymbol>/<CashTokenSymbol>/orderbook/<OrderType>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+OrderType | One of `buy / sell`
+
+### HTTP JSON Response
+
+List of [Order book](#order-book)s:
+
+[
+  [Order book](#order-book), ...
+]
+
+## Canceling order
+
+> CURL
+
+```shell
+curl "<%= data.urls.arbiter %>/orders/123abcdef"
+  -X DELETE
+  -H "Authorization: YOUR-AUTHORIZATION-KEY"
+  -H "Content-Type: application/json"
+  --data '{"signature": "abcdef123123}'
+```
+
+This endpoint cancels order
+
+### HTTP Request
+
+`DELETE <%= data.urls.arbiter %>/orders/<OrderId>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+OrderId | Order's identificator
+
+### Body JSON Parameters
+
+Parameter | Description
+--------- | -----------
+signature | ETH EIP712 signature
+
+### HTTP JSON Response
+
+Empty object

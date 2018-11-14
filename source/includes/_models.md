@@ -1,0 +1,117 @@
+# Models
+
+## Token
+
+## Trade
+
+```javascript
+{
+  id: "abc1",
+  timestamp: "2019-02-10 15:45:00",
+  type: "buy",
+  cashToken: {},
+  stockToken: {},
+  cashPriceE8: "0xde0b6b3a7640000",
+  stockAmount: "0xde0b6b3a7640000",
+  maker: "0x1234567890123456789012345678901234567890",
+  taker: "0x1234567890123456789012345678901234567890"
+}
+```
+
+Attribute | Type | Description
+--------- | ---- | -----------
+id        | string | Unique identificator
+timestamp | string | Creation timestamp: `YYYY-MM-DD HH:mm:ss`
+type      | string | Order type: `buy / sell`
+cashToken | Token | cash token model
+stockToken | Token | stock token model
+cashPrice | string | HEX of cash price * 10^8
+stockAmount | string | HEX of stock amount in pennies: coins count * 10^token decimal count
+maker | string | maker's eth address
+taker | string | taker's eth address
+
+## Order book
+
+```javascript
+{
+  minCashPriceE8: "0xde0b6b3a7640000",
+  maxCashPriceE8: "0xde0b6b3a7640000",
+  stockAmount: "0xde0b6b3a7640000",
+  type: "buy"
+}
+```
+
+Attribute | Type | Description
+--------- | ---- | -----------
+minCashPriceE8 | string | HEX of `min` value of cash price range * 10^8
+maxCashPriceE8 | string | HEX of `max` value of cash price range * 10^8
+stockAmount | string | HEX of stock amount in pennies: coins count * 10^token decimal count
+type | string (buy | sell) | Order type
+
+## Order
+
+```javascript
+{
+  id: "123a",
+  cashToken: {},
+  stockToken: {},
+  type: "buy",
+  stockAmount: "0xde0b6b3a7640000",
+  cashPrice: "0xde0b6b3a7640000",
+  maker: "0x1234567890123456789012345678901234567890",
+  fulfilledStockAmount: "0xde0b6b3a7640000",
+  expiryDate: "2019-02-10 15:45:00",
+  createdAt: "2019-02-10 15:45:00"
+}
+```
+
+Attribute | Type | Description
+--------- | ---- | -----------
+id | string | Identificator
+cashToken | Token |
+stockToken | Token |
+type | string | Order type: `buy / sell`
+stockAmount | string | HEX of stock amount in pennies: coins count * 10^token decimal count
+cashPrice | string | HEX of cash price * 10^8
+fulfilledStockAmount | string | HEX of what ???
+expiryDate | string | Expiry date: `YYYY-MM-DD HH:mm:ss`
+createdAt | string | Creation timestamp: `YYYY-MM-DD HH:mm:ss`
+
+## Token Account
+
+```javascript
+{
+  id: "123a",
+  token: {},
+  totalAmount: "0xde0b6b3a7640000",
+  total-amount: "0xde0b6b3a7640000",
+  onOrders: "0xde0b6b3a7640000"
+}
+```
+
+Attribute | Type | Description
+--------- | ---- | -----------
+id | string | Identificator
+token | Token |
+totalAmount | string | HEX of stock amount in pennies: coins count * 10^token decimal count
+onOrders | string | HEX of on orders fund amount in pennies: coins count * 10^token decimal count
+
+## Funding
+
+```javascript
+{
+  id: "abc1",
+  type: "buy",
+  amount: "0xde0b6b3a7640000",
+  token: {},
+  transactionStatus: {}
+}
+```
+
+Attribute | Type | Description
+--------- | ---- | -----------
+id | string | Identificator
+token | Token |
+type | string | Order type: `buy / sell`
+amount | string | HEX of stock amount in pennies: coins count * 10^token decimal count
+transactionStatus | ??? | ???

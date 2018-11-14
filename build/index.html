@@ -1,0 +1,1004 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo.png" class="logo" alt="Logo" />
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#general" class="toc-h1 toc-link" data-title="General">General</a>
+          </li>
+          <li>
+            <a href="#architectural-conventions" class="toc-h1 toc-link" data-title="Architectural conventions">Architectural conventions</a>
+          </li>
+          <li>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+          </li>
+          <li>
+            <a href="#models" class="toc-h1 toc-link" data-title="Models">Models</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#token" class="toc-h2 toc-link" data-title="Token">Token</a>
+                  </li>
+                  <li>
+                    <a href="#trade" class="toc-h2 toc-link" data-title="Trade">Trade</a>
+                  </li>
+                  <li>
+                    <a href="#order-book" class="toc-h2 toc-link" data-title="Order book">Order book</a>
+                  </li>
+                  <li>
+                    <a href="#order" class="toc-h2 toc-link" data-title="Order">Order</a>
+                  </li>
+                  <li>
+                    <a href="#token-account" class="toc-h2 toc-link" data-title="Token Account">Token Account</a>
+                  </li>
+                  <li>
+                    <a href="#funding" class="toc-h2 toc-link" data-title="Funding">Funding</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#exchange" class="toc-h1 toc-link" data-title="Exchange">Exchange</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-tokens" class="toc-h2 toc-link" data-title="Get tokens">Get tokens</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#market" class="toc-h1 toc-link" data-title="Market">Market</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-trades" class="toc-h2 toc-link" data-title="Get trades">Get trades</a>
+                  </li>
+                  <li>
+                    <a href="#get-orderbook" class="toc-h2 toc-link" data-title="Get orderbook">Get orderbook</a>
+                  </li>
+                  <li>
+                    <a href="#canceling-order" class="toc-h2 toc-link" data-title="Canceling order">Canceling order</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#wallet" class="toc-h1 toc-link" data-title="Wallet">Wallet</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-orders-for-market" class="toc-h2 toc-link" data-title="Get orders for market">Get orders for market</a>
+                  </li>
+                  <li>
+                    <a href="#get-all-token-accounts" class="toc-h2 toc-link" data-title="Get all token accounts">Get all token accounts</a>
+                  </li>
+                  <li>
+                    <a href="#get-all-trades" class="toc-h2 toc-link" data-title="Get all trades">Get all trades</a>
+                  </li>
+                  <li>
+                    <a href="#get-nonces" class="toc-h2 toc-link" data-title="Get nonces">Get nonces</a>
+                  </li>
+                  <li>
+                    <a href="#deposit" class="toc-h2 toc-link" data-title="Deposit">Deposit</a>
+                  </li>
+                  <li>
+                    <a href="#withdraw" class="toc-h2 toc-link" data-title="Withdraw">Withdraw</a>
+                  </li>
+                  <li>
+                    <a href="#get-all-fundings" class="toc-h2 toc-link" data-title="Get all fundings">Get all fundings</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+        <ul class="toc-footer">
+            <li><a href='https://counter.market'>Go to site</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='introduction'>Introduction</h1>
+<p>Welcome to Counter.market</p>
+<h1 id='general'>General</h1>
+<p>We are providing our API as a Restfull web service. We use JSON as a primary data format for our service.</p>
+
+<aside class="notice">
+  Note you should use `Content-Type: application/json` HTTP header
+</aside>
+
+<p>Server responses with <code>200 OK</code> HTTP Status for every request proceed well and with <code>400 Bad Request</code> otherwise.
+The body of failed response contains data required for explanation and debugging.</p>
+<h1 id='architectural-conventions'>Architectural conventions</h1>
+<p>For each token we name <code>pennie</code> the minimal fraction of this token. For ETH it is WEI.</p>
+
+<p>So, 1 ETH is equal to 10^18 WEI. The exponent of 10 for number of pennies for the token we name <code>decimalPlaces</code> of that token.</p>
+
+<p>Each <a href="#token">Token</a> has a <code>code</code> - the special number identificator assigned to this token by us. ???</p>
+<h1 id='authentication'>Authentication</h1>
+<blockquote>
+<p>Example of how to sign the <code>hello message</code> to produce <code>authorization token</code></p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">getAccounts</span><span class="p">(</span><span class="kd">function</span> <span class="nx">getAccountsCallback</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">accounts</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">from</span> <span class="o">=</span> <span class="nx">accounts</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="s1">'string'</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="s1">'hello'</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="s1">'counter'</span> <span class="p">}</span>
+  <span class="p">];</span>
+  <span class="nx">web3</span><span class="p">.</span><span class="nx">currentProvider</span><span class="p">.</span><span class="nx">sendAsync</span><span class="p">({</span>
+    <span class="na">from</span><span class="p">:</span> <span class="nx">from</span><span class="p">,</span>
+    <span class="na">method</span><span class="p">:</span> <span class="s1">'eth_signTypedData'</span><span class="p">,</span>
+    <span class="na">params</span><span class="p">:</span> <span class="p">[</span><span class="nx">data</span><span class="p">,</span> <span class="nx">from</span><span class="p">],</span>
+  <span class="p">},</span> <span class="kd">function</span> <span class="nx">sendAsyncCallback</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">result</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre>
+<p>Use ethereum signature of <code>{ hello: &#39;counter&#39; }</code> as an <code>authorization key</code></p>
+
+<aside class="notice">
+  Note you should use `Authorization: YOUR-AUTHORIZATION-KEY` HTTP header
+</aside>
+
+<aside class="notice">
+  You should use one of the addresses you have linked to your http://staging.counter.market:8001/client/ account through website earlier.
+</aside>
+<h1 id='models'>Models</h1><h2 id='token'>Token</h2>
+<p>Token trading on our exchange</p>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="nl">code</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="nl">symbol</span><span class="p">:</span> <span class="s2">"ETH"</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="s2">"Ethereum"</span>
+  <span class="nl">decimalPlaces</span><span class="p">:</span> <span class="mi">18</span>
+  <span class="nl">contractAddress</span><span class="p">:</span> <span class="kc">null</span>
+<span class="p">}</span>
+</code></pre>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>number</td>
+<td>Token code</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Token ticker symbol</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Token name</td>
+</tr>
+<tr>
+<td>decimalPlaces</td>
+<td>number</td>
+<td>number of pennies in 1 token coin. (i.e 1 ETH = 10^18 of WEI so for ETH decimalPlaces = 18)</td>
+</tr>
+<tr>
+<td>contractAddress</td>
+<td>string / null</td>
+<td>for ERC-20 tokens: token&#39;s smart contract address, for ETH: null</td>
+</tr>
+</tbody></table>
+<h2 id='trade'>Trade</h2>
+<p>Market&#39;s trade</p>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="s2">"abc1"</span><span class="p">,</span>
+  <span class="nx">timestamp</span><span class="p">:</span> <span class="s2">"2019-02-10 15:45:00"</span><span class="p">,</span>
+  <span class="nx">type</span><span class="p">:</span> <span class="s2">"buy"</span><span class="p">,</span>
+  <span class="nx">cashToken</span><span class="p">:</span> <span class="p">{},</span>
+  <span class="nx">stockToken</span><span class="p">:</span> <span class="p">{},</span>
+  <span class="nx">cashPriceE8</span><span class="p">:</span> <span class="s2">"0xde0b6b3a7640000"</span><span class="p">,</span>
+  <span class="nx">stockAmount</span><span class="p">:</span> <span class="s2">"0xde0b6b3a7640000"</span><span class="p">,</span>
+  <span class="nx">maker</span><span class="p">:</span> <span class="s2">"0x1234567890123456789012345678901234567890"</span><span class="p">,</span>
+  <span class="nx">taker</span><span class="p">:</span> <span class="s2">"0x1234567890123456789012345678901234567890"</span>
+<span class="p">}</span>
+</code></pre>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>Unique identificator</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>string</td>
+<td>Creation timestamp: <code>YYYY-MM-DD HH:mm:ss</code></td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Order type: <code>buy / sell</code></td>
+</tr>
+<tr>
+<td>cashToken</td>
+<td>Token</td>
+<td>cash token model</td>
+</tr>
+<tr>
+<td>stockToken</td>
+<td>Token</td>
+<td>stock token model</td>
+</tr>
+<tr>
+<td>cashPrice</td>
+<td>string</td>
+<td>HEX of cash price * 10^8</td>
+</tr>
+<tr>
+<td>stockAmount</td>
+<td>string</td>
+<td>HEX of stock amount in pennies: coins count * 10^token decimal count</td>
+</tr>
+<tr>
+<td>maker</td>
+<td>string</td>
+<td>maker&#39;s eth address</td>
+</tr>
+<tr>
+<td>taker</td>
+<td>string</td>
+<td>taker&#39;s eth address</td>
+</tr>
+</tbody></table>
+<h2 id='order-book'>Order book</h2>
+<p>Market&#39;s orderbook entity. Stock amount is equal to sum of all order&#39;s volumes of given type in given cash price range.</p>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="nl">minCashPriceE8</span><span class="p">:</span> <span class="s2">"0xde0b6b3a7640000"</span><span class="p">,</span>
+  <span class="nx">maxCashPriceE8</span><span class="p">:</span> <span class="s2">"0xde0b6b3a7640000"</span><span class="p">,</span>
+  <span class="nx">stockAmount</span><span class="p">:</span> <span class="s2">"0xde0b6b3a7640000"</span><span class="p">,</span>
+  <span class="nx">type</span><span class="p">:</span> <span class="s2">"buy"</span>
+<span class="p">}</span>
+</code></pre>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>minCashPriceE8</td>
+<td>string</td>
+<td>HEX of <code>min</code> value of cash price range * 10^8</td>
+</tr>
+<tr>
+<td>maxCashPriceE8</td>
+<td>string</td>
+<td>HEX of <code>max</code> value of cash price range * 10^8</td>
+</tr>
+<tr>
+<td>stockAmount</td>
+<td>string</td>
+<td>HEX of stock amount in pennies: coins count * 10^token decimal count</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string (buy</td>
+<td>sell)</td>
+</tr>
+</tbody></table>
+<h2 id='order'>Order</h2><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="s2">"123abcdef"</span><span class="p">,</span>
+  <span class="nx">cashToken</span><span class="p">:</span> <span class="p">{},</span>
+  <span class="nx">stockToken</span><span class="p">:</span> <span class="p">{},</span>
+  <span class="nx">type</span><span class="p">:</span> <span class="s2">"buy"</span><span class="p">,</span>
+  <span class="nx">stockAmount</span><span class="p">:</span> <span class="s2">"0xde0b6b3a7640000"</span><span class="p">,</span>
+  <span class="nx">cashPrice</span><span class="p">:</span> <span class="s2">"0xde0b6b3a7640000"</span><span class="p">,</span>
+  <span class="nx">maker</span><span class="p">:</span> <span class="s2">"0x1234567890123456789012345678901234567890"</span><span class="p">,</span>
+  <span class="nx">fulfilledStockAmount</span><span class="p">:</span> <span class="s2">"0xde0b6b3a7640000"</span><span class="p">,</span>
+  <span class="nx">expiryDate</span><span class="p">:</span> <span class="s2">"2019-02-10 15:45:00"</span><span class="p">,</span>
+  <span class="nx">createdAt</span><span class="p">:</span> <span class="s2">"2019-02-10 15:45:00"</span>
+<span class="p">}</span>
+</code></pre>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>Identificator</td>
+</tr>
+<tr>
+<td>cashToken</td>
+<td>Token</td>
+<td></td>
+</tr>
+<tr>
+<td>stockToken</td>
+<td>Token</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Order type: <code>buy / sell</code></td>
+</tr>
+<tr>
+<td>stockAmount</td>
+<td>string</td>
+<td>HEX of stock amount in pennies: coins count * 10^token decimal count</td>
+</tr>
+<tr>
+<td>cashPrice</td>
+<td>string</td>
+<td>HEX of cash price * 10^8</td>
+</tr>
+<tr>
+<td>fulfilledStockAmount</td>
+<td>string</td>
+<td>HEX of what ???</td>
+</tr>
+<tr>
+<td>expiryDate</td>
+<td>string</td>
+<td>Expiry date: <code>YYYY-MM-DD HH:mm:ss</code></td>
+</tr>
+<tr>
+<td>createdAt</td>
+<td>string</td>
+<td>Creation timestamp: <code>YYYY-MM-DD HH:mm:ss</code></td>
+</tr>
+</tbody></table>
+<h2 id='token-account'>Token Account</h2>
+<p>Each wallet has few fundings in several of the tokens trading on the platform. We name such a relation as a <code>Token Account</code></p>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="s2">"123abcdef"</span><span class="p">,</span>
+  <span class="nx">token</span><span class="p">:</span> <span class="p">{},</span>
+  <span class="nx">totalAmount</span><span class="p">:</span> <span class="s2">"0xde0b6b3a7640000"</span><span class="p">,</span>
+  <span class="nx">total</span><span class="o">-</span><span class="nx">amount</span><span class="p">:</span> <span class="s2">"0xde0b6b3a7640000"</span><span class="p">,</span>
+  <span class="nx">onOrders</span><span class="p">:</span> <span class="s2">"0xde0b6b3a7640000"</span>
+<span class="p">}</span>
+</code></pre>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>Identificator</td>
+</tr>
+<tr>
+<td>token</td>
+<td>Token</td>
+<td></td>
+</tr>
+<tr>
+<td>totalAmount</td>
+<td>string</td>
+<td>HEX of stock amount in pennies: coins count * 10^token decimal count</td>
+</tr>
+<tr>
+<td>onOrders</td>
+<td>string</td>
+<td>HEX of on orders fund amount in pennies: coins count * 10^token decimal count</td>
+</tr>
+</tbody></table>
+<h2 id='funding'>Funding</h2><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="s2">"abc1"</span><span class="p">,</span>
+  <span class="nx">type</span><span class="p">:</span> <span class="s2">"buy"</span><span class="p">,</span>
+  <span class="nx">amount</span><span class="p">:</span> <span class="s2">"0xde0b6b3a7640000"</span><span class="p">,</span>
+  <span class="nx">token</span><span class="p">:</span> <span class="p">{},</span>
+  <span class="nx">transactionStatus</span><span class="p">:</span> <span class="p">{}</span>
+<span class="p">}</span>
+</code></pre>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>Identificator</td>
+</tr>
+<tr>
+<td>token</td>
+<td>Token</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Order type: <code>buy / sell</code></td>
+</tr>
+<tr>
+<td>amount</td>
+<td>string</td>
+<td>HEX of stock amount in pennies: coins count * 10^token decimal count</td>
+</tr>
+<tr>
+<td>transactionStatus</td>
+<td>???</td>
+<td>???</td>
+</tr>
+</tbody></table>
+<h1 id='exchange'>Exchange</h1><h2 id='get-tokens'>Get tokens</h2>
+<blockquote>
+<p>CURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://staging.counter.market:8006/tokens"</span>
+  -X GET
+  -H <span class="s2">"Authorization: YOUR-AUTHORIZATION-KEY"</span>
+  -H <span class="s2">"Content-Type: application/json"</span>
+</code></pre>
+<p>This endpoint returns all tokens which can be traded on our platform.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET http://staging.counter.market:8006/tokens</code></p>
+<h3 id='http-json-response'>HTTP JSON Response</h3>
+<p>List of <a href="#token">Token</a>s:</p>
+
+<p>[
+  <a href="#token">Token</a>, ...
+]</p>
+<h1 id='market'>Market</h1><h2 id='get-trades'>Get trades</h2>
+<blockquote>
+<p>CURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://staging.counter.market:8006/market/DAI/ETH/trades"</span>
+  -X GET
+  -H <span class="s2">"Authorization: YOUR-AUTHORIZATION-KEY"</span>
+  -H <span class="s2">"Content-Type: application/json"</span>
+</code></pre>
+<p>This endpoint returns market&#39;s trades</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET http://staging.counter.market:8006/market/&lt;StockTokenSymbol&gt;/&lt;CashTokenSymbol&gt;/trades</code></p>
+<h3 id='http-json-response'>HTTP JSON Response</h3>
+<p>List of <a href="#trade">Trade</a>s:</p>
+
+<p>[
+  <a href="#trade">Trade</a>, ...
+]</p>
+<h2 id='get-orderbook'>Get orderbook</h2>
+<blockquote>
+<p>CURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://staging.counter.market:8006/market/DAI/ETH/orderbook/sell"</span>
+  -X GET
+  -H <span class="s2">"Authorization: YOUR-AUTHORIZATION-KEY"</span>
+  -H <span class="s2">"Content-Type: application/json"</span>
+</code></pre>
+<p>This endpoint returns current orderbook of the market.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET http://staging.counter.market:8006/market/&lt;StockTokenSymbol&gt;/&lt;CashTokenSymbol&gt;/orderbook/&lt;OrderType&gt;</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>OrderType</td>
+<td>One of <code>buy / sell</code></td>
+</tr>
+</tbody></table>
+<h3 id='http-json-response-2'>HTTP JSON Response</h3>
+<p>List of <a href="#order-book">Order book</a>s:</p>
+
+<p>[
+  <a href="#order-book">Order book</a>, ...
+]</p>
+<h2 id='canceling-order'>Canceling order</h2>
+<blockquote>
+<p>CURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://staging.counter.market:8006/orders/123abcdef"</span>
+  -X DELETE
+  -H <span class="s2">"Authorization: YOUR-AUTHORIZATION-KEY"</span>
+  -H <span class="s2">"Content-Type: application/json"</span>
+  --data <span class="s1">'{"signature": "abcdef123123}'</span>
+</code></pre>
+<p>This endpoint cancels order</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>DELETE http://staging.counter.market:8006/orders/&lt;OrderId&gt;</code></p>
+<h3 id='url-parameters-2'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>OrderId</td>
+<td>Order&#39;s identificator</td>
+</tr>
+</tbody></table>
+<h3 id='body-json-parameters'>Body JSON Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>signature</td>
+<td>ETH EIP712 signature</td>
+</tr>
+</tbody></table>
+<h3 id='http-json-response-3'>HTTP JSON Response</h3>
+<p>Empty object</p>
+<h1 id='wallet'>Wallet</h1><h2 id='get-orders-for-market'>Get orders for market</h2>
+<blockquote>
+<p>CURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://staging.counter.market:8006/wallets/0x1234567890123456789012345678901234567890/orders/DAI/ETH"</span>
+  -X GET
+  -H <span class="s2">"Authorization: YOUR-AUTHORIZATION-KEY"</span>
+  -H <span class="s2">"Content-Type: application/json"</span>
+</code></pre>
+<p>This endpoint returns unfulfilled orders of <code>&lt;ETHAddress&gt;</code> wallet in <code>&lt;StockTokenSymbol&gt;/&lt;CashTokenSymbol&gt;</code> market</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET http://staging.counter.market:8006/wallets/&lt;ETHAddress&gt;/orders/&lt;StockTokenSymbol&gt;/&lt;CashTokenSymbol&gt;</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ETHAddress</td>
+<td>ETH address of one of your linked wallets</td>
+</tr>
+</tbody></table>
+<h3 id='server-response'>Server response</h3>
+<p>List of <code>Order</code>s:</p>
+
+<p>[
+  <a href="#order">Order</a>, ...
+]</p>
+<h2 id='get-all-token-accounts'>Get all token accounts</h2>
+<blockquote>
+<p>CURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://staging.counter.market:8006/wallets/0x1234567890123456789012345678901234567890/token-accounts"</span>
+  -X GET
+  -H <span class="s2">"Authorization: YOUR-AUTHORIZATION-KEY"</span>
+  -H <span class="s2">"Content-Type: application/json"</span>
+</code></pre>
+<p>This endpoint returns all <a href="#token-account">Token Account</a>s for <code>&lt;ETHAddress&gt;</code> wallet</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET http://staging.counter.market:8006/wallets/&lt;ETHAddress&gt;/token-accounts</code></p>
+<h3 id='server-response-2'>Server response</h3>
+<p>List of <code>Token account</code>s for a binded <code>&lt;ETHAddress&gt;</code> wallet:</p>
+
+<p><code>[
+  [Token Account](#token-account), ...
+]</code></p>
+<h2 id='get-all-trades'>Get all trades</h2>
+<blockquote>
+<p>CURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://staging.counter.market:8006/wallets/0x1234567890123456789012345678901234567890/trades"</span>
+  -X GET
+  -H <span class="s2">"Authorization: YOUR-AUTHORIZATION-KEY"</span>
+  -H <span class="s2">"Content-Type: application/json"</span>
+</code></pre>
+<p>This endpoint returns the list of <a href="#trade">Trade</a>s of <code>&lt;ETHAddress&gt;</code> wallet</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET http://staging.counter.market:8006/wallets/&lt;ETHAddress&gt;/trades</code></p>
+<h3 id='server-response-3'>Server response</h3>
+<p>List of <code>Trades</code>s for a binded wallet with given <code>ETHAddress</code>:</p>
+
+<p><code>[
+  [Trade](#trades), ...
+]</code></p>
+<h2 id='get-nonces'>Get nonces</h2>
+<p>This endpoint returns exchange operation nonces for given <code>&lt;ETHAddress&gt;</code> wallet</p>
+
+<blockquote>
+<p>CURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://staging.counter.market:8006/wallets/0x1234567890123456789012345678901234567890/nonces"</span>
+  -X GET
+  -H <span class="s2">"Authorization: YOUR-AUTHORIZATION-KEY"</span>
+  -H <span class="s2">"Content-Type: application/json"</span>
+</code></pre><h3 id='http-request-4'>HTTP Request</h3>
+<p><code>GET http://staging.counter.market:8006/wallets/&lt;ETHAddress&gt;/nonces</code></p>
+<h3 id='server-response-4'>Server response</h3>
+<p>Dictionary of ETH transaction nonces for each of the exchange operations: <code>trade</code>, <code>withdraw</code>. Sample:</p>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="err">trade</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+    </span><span class="err">witdraw</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre><h2 id='deposit'>Deposit</h2>
+<blockquote>
+<p>CURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://staging.counter.market:8006/wallets/0x1234567890123456789012345678901234567890/deposits"</span>
+  -X PUT
+  -H <span class="s2">"Authorization: YOUR-AUTHORIZATION-KEY"</span>
+  -H <span class="s2">"Content-Type: application/json"</span>
+  --data <span class="s1">'{"tokenCode": 2, "amount": "0xA", "txHash": "0x123"}'</span>
+</code></pre>
+<p>Deposit funds to <code>&lt;ETHAddress&gt;</code> wallet</p>
+<h3 id='flow'>Flow</h3>
+<p>For depositing <code>ETH</code>:</p>
+
+<ul>
+<li><p>Invoke <code>depositEther</code> method of <code>TREASURY</code> smart contract by sending transaction with desired amount of <code>ETH</code> to deposit. That transaction&#39;s hash is used lately as parameter to an API call.</p></li>
+<li><p>Make an API call. transaction&#39;s hash</p></li>
+</ul>
+
+<p>For depositing <code>ERC-20</code> tokens:</p>
+
+<ul>
+<li><p>Send a transaction to allow <code>TREASURY</code> smart contract to operate with desired amount of your <code>ERC-20</code> tokens</p></li>
+<li><p>Invoke <code>depositERC20Token</code> method of <code>TREASURY</code> smart contract with the following arguments:</p></li>
+</ul>
+
+<p>Argument number | Type | Description
+0 | string | <a href="#token-account">Token Account</a> id
+1 | string | HEX of amount token in <code>pennies</code> to deposit
+* Make an API call</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>PUT http://staging.counter.market:8006/wallets/&lt;ETHAddress&gt;/deposits</code></p>
+<h3 id='body-json-parameters'>Body JSON Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>tokenCode</td>
+<td>number</td>
+<td>Code of the token !!!</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>string</td>
+<td>HEX of deposit amount * 10^token decimal places count</td>
+</tr>
+<tr>
+<td>txHash</td>
+<td>string</td>
+<td>Hash of Ethereum transaction</td>
+</tr>
+</tbody></table>
+<h3 id='server-response-5'>Server response</h3>
+<p>Empty response</p>
+<h2 id='withdraw'>Withdraw</h2>
+<blockquote>
+<p>CURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://staging.counter.market:8006/wallets/0x1234567890123456789012345678901234567890/withdrawals"</span>
+  -X PUT
+  -H <span class="s2">"Authorization: YOUR-AUTHORIZATION-KEY"</span>
+  -H <span class="s2">"Content-Type: application/json"</span>
+  --data <span class="s1">'{"tokenCode": 2, "amount": "0xA", "withdrawAddress": "0x123", "withdrawNonce": 10, "txHash": "0x123"}'</span>
+</code></pre>
+<p>Withdraw funds from <ETHAddress> wallet</p>
+<h3 id='flow-2'>Flow</h3>
+<ul>
+<li>Sign following structure with wallet&#39;s ethereum address you wanna to withdraw funds from</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>tokenCode</td>
+<td>uint16</td>
+<td>Token code</td>
+</tr>
+<tr>
+<td>withdrawAddress</td>
+<td>address</td>
+<td>ETH address to withdraw to</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>uint128</td>
+<td>Amount of funds to withdraw</td>
+</tr>
+<tr>
+<td>withdrawNonce</td>
+<td>uint64</td>
+<td>wallet&#39;s <code>nonce</code> for <code>withdraw</code> operation</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>Make an API call</li>
+</ul>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>PUT http://staging.counter.market:8006/wallets/&lt;ETHAddress&gt;/withdrawals</code></p>
+<h3 id='body-json-parameters-2'>Body JSON Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>tokenCode</td>
+<td>number</td>
+<td>Code of the token !!!</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>string</td>
+<td>!!!</td>
+</tr>
+<tr>
+<td>withdrawAddress</td>
+<td>string</td>
+<td>ETH address to withdraw to</td>
+</tr>
+<tr>
+<td>withdrawNonce</td>
+<td>number</td>
+<td>wallet&#39;s <code>nonce</code> for <code>withdraw</code> operation</td>
+</tr>
+<tr>
+<td>signature</td>
+<td>string</td>
+<td>Ethereum signature</td>
+</tr>
+</tbody></table>
+<h3 id='server-response-6'>Server response</h3>
+<p>Empty response</p>
+<h2 id='get-all-fundings'>Get all fundings</h2>
+<blockquote>
+<p>CURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://staging.counter.market:8006/wallets/0x1234567890123456789012345678901234567890/fundings"</span>
+  -X GET
+  -H <span class="s2">"Authorization: YOUR-AUTHORIZATION-KEY"</span>
+  -H <span class="s2">"Content-Type: application/json"</span>
+</code></pre>
+<p>This endpoints returns list of <a href="#funding">Funding</a>s of <ETHAddress> wallet</p>
+<h3 id='http-request-7'>HTTP Request</h3>
+<p><code>PUT http://staging.counter.market:8006/wallets/&lt;ETHAddress&gt;/fundings</code></p>
+<h3 id='server-response-7'>Server response</h3>
+<p>List of <code>Funding</code>s of the wallet binded to <code>ETHAddress</code>:</p>
+
+<p>[
+  <a href="#funding">Funding</a>, ...
+]</p>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>

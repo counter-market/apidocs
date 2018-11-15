@@ -1,5 +1,4 @@
 pages:
-  script:
   artifacts:
     paths:
     - build

@@ -1,4 +1,4 @@
-image: alpine:stable
+image: alpine:latest
 
 pages:
   only:

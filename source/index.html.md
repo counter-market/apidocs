@@ -18,7 +18,3 @@ includes:
 search: true
 ---
 
-# Introduction
-
-Welcome to Counter.market
-

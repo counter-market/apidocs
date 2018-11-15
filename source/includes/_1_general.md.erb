@@ -1,5 +1,7 @@
 # General
 
+## Overview
+
 We are providing our API as a Restfull web service. We use JSON as a primary data format for our service.
 
 <aside class="notice">
@@ -9,15 +11,19 @@ We are providing our API as a Restfull web service. We use JSON as a primary dat
 Server responses with `200 OK` HTTP Status for every request proceed well and with `400 Bad Request` otherwise.
 The body of failed response contains data required for explanation and debugging.
 
-# Architectural conventions
+## Smart contracts
+
+TODO: Write a section
+
+## Architectural conventions
 
 For each token we name `pennie` the minimal fraction of this token. For ETH it is WEI.
 
 So, 1 ETH is equal to 10^18 WEI. The exponent of 10 for number of pennies for the token we name `decimalPlaces` of that token.
 
-Each [Token](#token) has a `code` - the special number identificator assigned to this token by us. ???
+Each [Token](#token) has `code` attribute containing our internal identificator for this token.
 
-# Authentication
+## Authentication
 
 > Example of how to sign the `hello message` to produce `authorization token`
 

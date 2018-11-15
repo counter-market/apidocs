@@ -9,6 +9,6 @@ pages:
     - cp -R build/ imitation/
   artifacts:
     paths:
-    - build
+    - imitation
   only:
     - master

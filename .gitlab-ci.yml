@@ -1,4 +1,8 @@
 pages:
+  only:
+  - master
+  script:
+  - echo 'no steps required since we store build in repo'
   artifacts:
     paths:
     - build

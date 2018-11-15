@@ -216,16 +216,21 @@
         <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
-            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
-          </li>
-          <li>
             <a href="#general" class="toc-h1 toc-link" data-title="General">General</a>
-          </li>
-          <li>
-            <a href="#architectural-conventions" class="toc-h1 toc-link" data-title="Architectural conventions">Architectural conventions</a>
-          </li>
-          <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#overview" class="toc-h2 toc-link" data-title="Overview">Overview</a>
+                  </li>
+                  <li>
+                    <a href="#smart-contracts" class="toc-h2 toc-link" data-title="Smart contracts">Smart contracts</a>
+                  </li>
+                  <li>
+                    <a href="#architectural-conventions" class="toc-h2 toc-link" data-title="Architectural conventions">Architectural conventions</a>
+                  </li>
+                  <li>
+                    <a href="#authentication" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#models" class="toc-h1 toc-link" data-title="Models">Models</a>
@@ -306,9 +311,7 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1>
-<p>Welcome to Counter.market</p>
-<h1 id='general'>General</h1>
+        <h1 id='general'>General</h1><h2 id='overview'>Overview</h2>
 <p>We are providing our API as a Restfull web service. We use JSON as a primary data format for our service.</p>
 
 <aside class="notice">
@@ -317,13 +320,15 @@
 
 <p>Server responses with <code>200 OK</code> HTTP Status for every request proceed well and with <code>400 Bad Request</code> otherwise.
 The body of failed response contains data required for explanation and debugging.</p>
-<h1 id='architectural-conventions'>Architectural conventions</h1>
+<h2 id='smart-contracts'>Smart contracts</h2>
+<p>TODO: Write a section</p>
+<h2 id='architectural-conventions'>Architectural conventions</h2>
 <p>For each token we name <code>pennie</code> the minimal fraction of this token. For ETH it is WEI.</p>
 
 <p>So, 1 ETH is equal to 10^18 WEI. The exponent of 10 for number of pennies for the token we name <code>decimalPlaces</code> of that token.</p>
 
-<p>Each <a href="#token">Token</a> has a <code>code</code> - the special number identificator assigned to this token by us. ???</p>
-<h1 id='authentication'>Authentication</h1>
+<p>Each <a href="#token">Token</a> has <code>code</code> attribute containing our internal identificator for this token.</p>
+<h2 id='authentication'>Authentication</h2>
 <blockquote>
 <p>Example of how to sign the <code>hello message</code> to produce <code>authorization token</code></p>
 </blockquote>
@@ -772,7 +777,7 @@ The body of failed response contains data required for explanation and debugging
 </tr>
 </tbody></table>
 <h3 id='server-response'>Server response</h3>
-<p>List of <code>Order</code>s:</p>
+<p>List of <a href="#order">Order</a>s:</p>
 
 <p>[
   <a href="#order">Order</a>, ...
@@ -790,11 +795,11 @@ The body of failed response contains data required for explanation and debugging
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET http://staging.counter.market:8006/wallets/&lt;ETHAddress&gt;/token-accounts</code></p>
 <h3 id='server-response-2'>Server response</h3>
-<p>List of <code>Token account</code>s for a binded <code>&lt;ETHAddress&gt;</code> wallet:</p>
+<p>List of <a href="#token-account">Token Account</a>s for a binded <code>&lt;ETHAddress&gt;</code> wallet:</p>
 
-<p><code>[
-  [Token Account](#token-account), ...
-]</code></p>
+<p>[
+  <a href="#token-account">Token Account</a>, ...
+]</p>
 <h2 id='get-all-trades'>Get all trades</h2>
 <blockquote>
 <p>CURL</p>
@@ -808,11 +813,11 @@ The body of failed response contains data required for explanation and debugging
 <h3 id='http-request-3'>HTTP Request</h3>
 <p><code>GET http://staging.counter.market:8006/wallets/&lt;ETHAddress&gt;/trades</code></p>
 <h3 id='server-response-3'>Server response</h3>
-<p>List of <code>Trades</code>s for a binded wallet with given <code>ETHAddress</code>:</p>
+<p>List of <a href="#trade">Trade</a>&#39;s for a binded wallet with given <code>&lt;ETHAddress&gt;</code>:</p>
 
-<p><code>[
-  [Trade](#trades), ...
-]</code></p>
+<p>[
+  <a href="#trade">Trade</a>, ...
+]</p>
 <h2 id='get-nonces'>Get nonces</h2>
 <p>This endpoint returns exchange operation nonces for given <code>&lt;ETHAddress&gt;</code> wallet</p>
 
@@ -826,14 +831,17 @@ The body of failed response contains data required for explanation and debugging
 </code></pre><h3 id='http-request-4'>HTTP Request</h3>
 <p><code>GET http://staging.counter.market:8006/wallets/&lt;ETHAddress&gt;/nonces</code></p>
 <h3 id='server-response-4'>Server response</h3>
-<p>Dictionary of ETH transaction nonces for each of the exchange operations: <code>trade</code>, <code>withdraw</code>. Sample:</p>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="err">trade</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
-    </span><span class="err">witdraw</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre><h2 id='deposit'>Deposit</h2>
+<p>Dictionary of ETH transaction nonces for each of the exchange operations: <code>trade</code>, <code>withdraw</code>:</p>
+
+<p><code>
+[
+  {
+    trade: 12,
+    witdraw: 22,
+  }
+]
+</code></p>
+<h2 id='deposit'>Deposit</h2>
 <blockquote>
 <p>CURL</p>
 </blockquote>
@@ -848,21 +856,46 @@ The body of failed response contains data required for explanation and debugging
 <p>For depositing <code>ETH</code>:</p>
 
 <ul>
-<li><p>Invoke <code>depositEther</code> method of <code>TREASURY</code> smart contract by sending transaction with desired amount of <code>ETH</code> to deposit. That transaction&#39;s hash is used lately as parameter to an API call.</p></li>
-<li><p>Make an API call. transaction&#39;s hash</p></li>
+<li>Invoke <code>depositEther</code> method of <code>TREASURY</code> smart contract by sending transaction from corresponding ethereum account.
+Set transaction value equal to amount of <code>ETH</code> you wanna to deposit.
+Refer to smart contract method&#39;s arguments:</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Argument number</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>0</td>
+<td>string</td>
+<td>Address of ethereum account binded to wallet to deposit to</td>
+</tr>
+</tbody></table>
+
+<p>NOTE: This transaction&#39;s hash will be used lately as parameter to an API call.</p>
+
+<ul>
+<li>Make an API call</li>
 </ul>
 
 <p>For depositing <code>ERC-20</code> tokens:</p>
 
 <ul>
-<li><p>Send a transaction to allow <code>TREASURY</code> smart contract to operate with desired amount of your <code>ERC-20</code> tokens</p></li>
+<li><p>Send a transaction to allow <code>TREASURY</code> smart contract to operate with desired amount of your <code>ERC-20</code> tokens.
+Use <a href="#token">Token</a>&#39;s <code>contractAddress</code> as a receiver address for this transaction.</p></li>
 <li><p>Invoke <code>depositERC20Token</code> method of <code>TREASURY</code> smart contract with the following arguments:</p></li>
 </ul>
 
 <p>Argument number | Type | Description
 0 | string | <a href="#token-account">Token Account</a> id
-1 | string | HEX of amount token in <code>pennies</code> to deposit
-* Make an API call</p>
+1 | string | HEX of token amount to deposit in <code>pennies</code></p>
+
+<ul>
+<li>Make an API call</li>
+</ul>
 <h3 id='http-request-5'>HTTP Request</h3>
 <p><code>PUT http://staging.counter.market:8006/wallets/&lt;ETHAddress&gt;/deposits</code></p>
 <h3 id='body-json-parameters'>Body JSON Parameters</h3>
@@ -876,12 +909,12 @@ The body of failed response contains data required for explanation and debugging
 <tr>
 <td>tokenCode</td>
 <td>number</td>
-<td>Code of the token !!!</td>
+<td>Code of the token</td>
 </tr>
 <tr>
 <td>amount</td>
 <td>string</td>
-<td>HEX of deposit amount * 10^token decimal places count</td>
+<td>HEX of deposit amount in pennies (multiplied by 10^token decimal places count)</td>
 </tr>
 <tr>
 <td>txHash</td>
@@ -901,7 +934,7 @@ The body of failed response contains data required for explanation and debugging
   -H <span class="s2">"Content-Type: application/json"</span>
   --data <span class="s1">'{"tokenCode": 2, "amount": "0xA", "withdrawAddress": "0x123", "withdrawNonce": 10, "txHash": "0x123"}'</span>
 </code></pre>
-<p>Withdraw funds from <ETHAddress> wallet</p>
+<p>Withdraw funds from <code>&lt;ETHAddress&gt;</code> wallet</p>
 <h3 id='flow-2'>Flow</h3>
 <ul>
 <li>Sign following structure with wallet&#39;s ethereum address you wanna to withdraw funds from</li>
@@ -952,12 +985,12 @@ The body of failed response contains data required for explanation and debugging
 <tr>
 <td>tokenCode</td>
 <td>number</td>
-<td>Code of the token !!!</td>
+<td>Code of the token</td>
 </tr>
 <tr>
 <td>amount</td>
 <td>string</td>
-<td>!!!</td>
+<td>HEX of withdraw amount in pennies (multiplied by 10^token decimal places count)</td>
 </tr>
 <tr>
 <td>withdrawAddress</td>
@@ -990,7 +1023,7 @@ The body of failed response contains data required for explanation and debugging
 <h3 id='http-request-7'>HTTP Request</h3>
 <p><code>PUT http://staging.counter.market:8006/wallets/&lt;ETHAddress&gt;/fundings</code></p>
 <h3 id='server-response-7'>Server response</h3>
-<p>List of <code>Funding</code>s of the wallet binded to <code>ETHAddress</code>:</p>
+<p>List of <a href="#funding">Funding</a>s of the wallet binded to <code>&lt;ETHAddress&gt;</code>:</p>
 
 <p>[
   <a href="#funding">Funding</a>, ...

@@ -1,14 +1,12 @@
 image: alpine:latest
 
 pages:
-  only:
-    - master
+  stage: deploy
   script:
-    - echo 'probably we need some steps even if it is prebuilt lol'
-    - mkdir imitation
-    - cp -R build/ imitation/
+  - mkdir imitation
+  - mv build/* imitation
   artifacts:
     paths:
     - imitation
   only:
-    - master
+  - master

@@ -27,9 +27,10 @@ ETHAddress | ETH address of one of your linked wallets
 
 List of [Order](#order)s:
 
-[
-  [Order](#order), ...
-]
+{
+  items: [ [Order](#order), ... ],
+  total: TOTAL_NUMBER_OF_TOTALS
+}
 
 ## Get all token accounts
 
@@ -77,9 +78,10 @@ This endpoint returns the list of [Trade](#trade)s of `<ETHAddress>` wallet
 
 List of [Trade](#trade)'s for a binded wallet with given `<ETHAddress>`:
 
-[
-  [Trade](#trade), ...
-]
+{
+  items: [ [Trade](#trade), ... ],
+  total: TOTAL_NUMBER_OF_TRADES
+}
 
 ## Get nonces
 
@@ -94,6 +96,15 @@ curl "<%= data.urls.arbiter %>/wallets/0x123456789012345678901234567890123456789
   -H "Content-Type: application/json"
 ```
 
+> RESPONSE
+
+```javascript
+{
+  trade: 22,
+  withdraw: 12
+}
+```
+
 ### HTTP Request
 
 `GET <%= data.urls.arbiter %>/wallets/<ETHAddress>/nonces`
@@ -103,12 +114,10 @@ curl "<%= data.urls.arbiter %>/wallets/0x123456789012345678901234567890123456789
 Dictionary of ETH transaction nonces for each of the exchange operations: `trade`, `withdraw`:
 
 `
-[
-  {
-    trade: 12,
-    witdraw: 22,
-  }
-]
+{
+  trade: NONCE_FOR_TRADE_OPERATION,
+  witdraw: NONCE_FOR_WITHDRAW_OPERATION,
+}
 `
 
 ## Deposit
@@ -125,34 +134,39 @@ curl "<%= data.urls.arbiter %>/wallets/0x123456789012345678901234567890123456789
 
 Deposit funds to `<ETHAddress>` wallet
 
-### Flow
+### Depositing `ETH`:
 
-For depositing `ETH`:
+Step 1 - Invoke `depositEther` method of `TREASURY` smart contract by sending transaction from corresponding ethereum account.
+  Set transaction value equal to amount of `ETH` you wanna to deposit.
+  Refer to smart contract method's arguments:
 
-* Invoke `depositEther` method of `TREASURY` smart contract by sending transaction from corresponding ethereum account.
-Set transaction value equal to amount of `ETH` you wanna to deposit.
-Refer to smart contract method's arguments:
+  Argument number | Type | Description
+  --------------- | ---- | -----------
+  0 | string | Address of ethereum account binded to wallet to deposit to
 
-Argument number | Type | Description
---------------- | ---- | -----------
-0 | string | Address of ethereum account binded to wallet to deposit to
+  <aside class="notice">
+    NOTE: This transaction's hash will be used lately as parameter to an API call.
+  </aside>
 
-NOTE: This transaction's hash will be used lately as parameter to an API call.
+Step 2 - Make an API call
 
-* Make an API call
+### Depositing `ERC-20` tokens:
 
-For depositing `ERC-20` tokens:
+Step 1 - Invoke `approve` method of `ERC-20` token's smart contract to grant `TREASURY` smart contract to operate with allowed amount of your `ERC-20` tokens from your behalf.
+  Use [Token](#token)'s `contractAddress` as a receiver address for this transaction.
 
-* Send a transaction to allow `TREASURY` smart contract to operate with desired amount of your `ERC-20` tokens.
-Use [Token](#token)'s `contractAddress` as a receiver address for this transaction.
+Step 2 - Invoke `depositERC20Token` method of `TREASURY` smart contract with the following arguments:
 
-* Invoke `depositERC20Token` method of `TREASURY` smart contract with the following arguments:
+  Argument number | Type | Description
+  --------------- | ---- | -----------
+  0 | string | [Token Account](#token-account) id
+  1 | string | HEX of token amount to deposit in `pennies`
 
-Argument number | Type | Description
-0 | string | [Token Account](#token-account) id
-1 | string | HEX of token amount to deposit in `pennies`
+  <aside class="notice">
+    NOTE: This transaction's hash will be used lately as parameter to an API call.
+  </aside>
 
-* Make an API call
+Step 3 - Make an API call
 
 ### HTTP Request
 
@@ -179,23 +193,24 @@ curl "<%= data.urls.arbiter %>/wallets/0x123456789012345678901234567890123456789
   -X PUT
   -H "Authorization: YOUR-AUTHORIZATION-KEY"
   -H "Content-Type: application/json"
-  --data '{"tokenCode": 2, "amount": "0xA", "withdrawAddress": "0x123", "withdrawNonce": 10, "txHash": "0x123"}'
+  --data '{"tokenCode": 2, "amount": "0xA", "withdrawAddress": "0x123", "withdrawNonce": 10, "signature": "0x123"}'
 ```
 
 Withdraw funds from `<ETHAddress>` wallet
 
 ### Flow
 
-* Sign following structure with wallet's ethereum address you wanna to withdraw funds from
+Step 1 - Sign following structure with wallet's ethereum address you wanna to withdraw funds from
 
 Attribute | Type | Description
 --------- | ---- | -----------
-tokenCode | uint16 | Token code
+tokenCode | uint256 | [Token](#token) code
 withdrawAddress | address | ETH address to withdraw to
-amount | uint128 | Amount of funds to withdraw
-withdrawNonce | uint64 | wallet's `nonce` for `withdraw` operation
+amount | uint256 | Amount of funds (in `pennies`) to withdraw in HEX
+withdrawFeeE5 | uint256 | The vallue of `WITHDRAWAL_FEE` * 10<sup>3</sup> in HEX
+withdrawNonce | uint256 | wallet's `nonce` for `withdraw` operation
 
-* Make an API call
+Step 2 - Make an API call
 
 ### HTTP Request
 
@@ -208,8 +223,9 @@ Parameter | Type | Description
 tokenCode | number | Code of the token
 amount | string | HEX of withdraw amount in pennies (multiplied by 10^token decimal places count)
 withdrawAddress | string | ETH address to withdraw to
+withdrawFeeE5 | string | The vallue of `WITHDRAWAL_FEE` * 10<sup>3</sup> in HEX
 withdrawNonce | number | wallet's `nonce` for `withdraw` operation
-signature | string | Ethereum signature
+signature | string | Ethereum signature (from step 1)
 
 ### Server response
 
@@ -236,6 +252,9 @@ This endpoints returns list of [Funding](#funding)s of <ETHAddress> wallet
 
 List of [Funding](#funding)s of the wallet binded to `<ETHAddress>`:
 
-[
-  [Funding](#funding), ...
-]
+<code>
+{
+  items: [ [Funding](#funding), ... ],
+  total: TOTAL_NUMER_OF_FUNDINGS
+}
+</code>

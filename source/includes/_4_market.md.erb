@@ -1,5 +1,103 @@
 # Market
 
+## Put an order
+
+> CURL
+
+```shell
+curl "<%= data.urls.arbiter %>/orders"
+  -X PUT
+  -H "Authorization: YOUR-AUTHORIZATION-KEY"
+  -H "Content-Type: application/json"
+  --data '{"tokenPair": {"stockTokenCode": 2, "cashTokenCode": 1}, "type": 1, "cashPriceE8": "0x2faf080", "stockAmount": "0x2540be400", "maker": "0x1234567890123456789012345678901234567890", "signature": "abc123...", tradeNonce: 22}'
+```
+
+Puts a `LIMIT` order to market's orderbook
+
+### Flow
+
+Step 1 - Provide EIP-712 signature for the following typed structure:
+
+`
+types: {
+  EIP712Domain: [
+    { name: 'name', type: 'string' },
+    { name: 'version', type: 'string' },
+    { name: 'chainId', type: 'uint256' },
+    { name: 'verifyingContract', type: 'address' },
+  ],
+  Message: [
+    { name: 'title', type: 'string' },
+    { name: 'action', type: 'uint256' },
+    { name: 'priceE8', type: 'uint256' },
+    { name: 'amount', type: 'uint256' },
+    { name: 'makerFeeE5', type: 'uint256' },
+    { name: 'takerFeeE5', type: 'uint256' },
+    { name: 'stockTokenCode', type: 'uint256' },
+    { name: 'cashTokenCode', type: 'uint256' },
+    { name: 'expiryTime' , type: 'uint256' },
+    { name: 'tradeNonce', type: 'uint256' }
+  ]
+},
+primaryType: 'Message',
+domain: {
+  name: 'counter.market',
+  version: '1',
+  chainId: '12345',
+  verifyingContract: `EXCHANGE_CONTRACT` address
+},
+message: {
+  title: ...,
+  action: ...,
+  priceE8: ...,
+  amount: ...,
+  makerFeeE5: ...,
+  takerFeeE5: ...,
+  stockTokenCode: ...,
+  cashTokenCode: ...,
+  expiryTime: ...,
+  tradeNonce: ...,
+}
+`
+
+Here is desriptions for each of the fields:
+
+Attribute | Type | Description
+--------- | ---- | -----------
+title | string | The following string `counter.market order:`
+action | uint256 | `0` for putting `BUY` order, `1` for putting `SELL` order
+priceE8 | uint256 | Your price for `stock` funds in `cash` * 10<sup>8</sup>
+amount | uint256 | Amount of `stock` funds in `pennies`
+makerFeeE5 | uint256 | The vallue of `MAKER_FEE` * 10<sup>3</sup> in HEX
+takerFeeE5 | uint256 | The vallue of `TAKER_FEE` * 10<sup>3</sup> in HEX
+stockTokenCode | uint256 | stock [Token](#token)'s code
+cashTokenCode | uint256 | cash [Token](#token)'s code
+expiryTime | uint256 | Unix timestamp of order's expiration
+tradeNonce | uint256 | wallet's `nonce` for `trade` operation
+
+Step 2 - Make an API call
+
+### HTTP Request
+
+`PUT <%= data.urls.arbiter %>/orders`
+
+### Body JSON Parameters
+
+Parameter | Type | Description
+--------- | ---- | -----------
+tokenPair.stockTokenCode | number | Code of the stock token
+tokenPair.cashTokenCode | number | Code of the cash token
+type | number | `0` for putting `BUY` order, `1` for putting `SELL` order
+cashPriceE8 | string | Your price for `stock` funds in `cash` * 10<sup>8</sup>
+stockAmount | string | Amount of `stock` funds in `pennies`
+maker | string | Ethereum address of your wallet to trade from
+signature | number | Ethereum `EIP-712` signature (from step 1)
+tradeNonce | string | wallet's `nonce` for `trade` operation
+
+### Server response
+
+Empty response
+
 ## Get trades
 
 > CURL
@@ -22,7 +120,8 @@ This endpoint returns market's trades
 List of [Trade](#trade)s:
 
 [
-  [Trade](#trade), ...
+  items: [ [Trade](#trade), ... ],
+  total: TOTAL_NUMBER_OF_TRADES
 ]
 
 ## Get orderbook

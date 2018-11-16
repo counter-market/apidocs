@@ -225,6 +225,9 @@
                     <a href="#smart-contracts" class="toc-h2 toc-link" data-title="Smart contracts">Smart contracts</a>
                   </li>
                   <li>
+                    <a href="#fees" class="toc-h2 toc-link" data-title="Fees">Fees</a>
+                  </li>
+                  <li>
                     <a href="#architectural-conventions" class="toc-h2 toc-link" data-title="Architectural conventions">Architectural conventions</a>
                   </li>
                   <li>
@@ -253,6 +256,9 @@
                   <li>
                     <a href="#funding" class="toc-h2 toc-link" data-title="Funding">Funding</a>
                   </li>
+                  <li>
+                    <a href="#transaction-status" class="toc-h2 toc-link" data-title="Transaction status">Transaction status</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -266,6 +272,9 @@
           <li>
             <a href="#market" class="toc-h1 toc-link" data-title="Market">Market</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#put-an-order" class="toc-h2 toc-link" data-title="Put an order">Put an order</a>
+                  </li>
                   <li>
                     <a href="#get-trades" class="toc-h2 toc-link" data-title="Get trades">Get trades</a>
                   </li>
@@ -322,6 +331,10 @@
 The body of failed response contains data required for explanation and debugging.</p>
 <h2 id='smart-contracts'>Smart contracts</h2>
 <p>TODO: Write a section</p>
+<h2 id='fees'>Fees</h2>
+<p><code>WITHDRAWAL_FEE</code> = <code>0.1</code>
+<code>MAKER_FEE</code> = <code>0.1</code>
+<code>TAKER_FEE</code> = <code>0.2</code></p>
 <h2 id='architectural-conventions'>Architectural conventions</h2>
 <p>For each token we name <code>pennie</code> the minimal fraction of this token. For ETH it is WEI.</p>
 
@@ -390,7 +403,7 @@ The body of failed response contains data required for explanation and debugging
 <tr>
 <td>decimalPlaces</td>
 <td>number</td>
-<td>number of pennies in 1 token coin. (i.e 1 ETH = 10^18 of WEI so for ETH decimalPlaces = 18)</td>
+<td>number of pennies in 1 token coin. (i.e 1 ETH = 10<sup>18</sup> of WEI so for ETH decimalPlaces = 18)</td>
 </tr>
 <tr>
 <td>contractAddress</td>
@@ -401,11 +414,11 @@ The body of failed response contains data required for explanation and debugging
 <h2 id='trade'>Trade</h2>
 <p>Market&#39;s trade</p>
 <pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
-  <span class="nl">id</span><span class="p">:</span> <span class="s2">"abc1"</span><span class="p">,</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="s2">"123abcdef"</span><span class="p">,</span>
   <span class="nx">timestamp</span><span class="p">:</span> <span class="s2">"2019-02-10 15:45:00"</span><span class="p">,</span>
   <span class="nx">type</span><span class="p">:</span> <span class="s2">"buy"</span><span class="p">,</span>
-  <span class="nx">cashToken</span><span class="p">:</span> <span class="p">{},</span>
-  <span class="nx">stockToken</span><span class="p">:</span> <span class="p">{},</span>
+  <span class="nx">stockTokenCode</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="nx">cashTokenCode</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="nx">cashPriceE8</span><span class="p">:</span> <span class="s2">"0xde0b6b3a7640000"</span><span class="p">,</span>
   <span class="nx">stockAmount</span><span class="p">:</span> <span class="s2">"0xde0b6b3a7640000"</span><span class="p">,</span>
   <span class="nx">maker</span><span class="p">:</span> <span class="s2">"0x1234567890123456789012345678901234567890"</span><span class="p">,</span>
@@ -435,24 +448,24 @@ The body of failed response contains data required for explanation and debugging
 <td>Order type: <code>buy / sell</code></td>
 </tr>
 <tr>
-<td>cashToken</td>
-<td>Token</td>
-<td>cash token model</td>
+<td>stockTokenCode</td>
+<td>string</td>
+<td>stock <a href="#token">Token</a>&#39;s code</td>
 </tr>
 <tr>
-<td>stockToken</td>
-<td>Token</td>
-<td>stock token model</td>
+<td>cashTokenCode</td>
+<td>string</td>
+<td>cash <a href="#token">Token</a>&#39;s code</td>
 </tr>
 <tr>
 <td>cashPrice</td>
 <td>string</td>
-<td>HEX of cash price * 10^8</td>
+<td>HEX of cash price * 10<sup>8</sup></td>
 </tr>
 <tr>
 <td>stockAmount</td>
 <td>string</td>
-<td>HEX of stock amount in pennies: coins count * 10^token decimal count</td>
+<td>HEX of stock amount in pennies: coins count * 10<sup>token decimal count</sup></td>
 </tr>
 <tr>
 <td>maker</td>
@@ -484,28 +497,28 @@ The body of failed response contains data required for explanation and debugging
 <tr>
 <td>minCashPriceE8</td>
 <td>string</td>
-<td>HEX of <code>min</code> value of cash price range * 10^8</td>
+<td>HEX of <code>min</code> value of cash price range * 10<sup>8</sup></td>
 </tr>
 <tr>
 <td>maxCashPriceE8</td>
 <td>string</td>
-<td>HEX of <code>max</code> value of cash price range * 10^8</td>
+<td>HEX of <code>max</code> value of cash price range * 10<sup>8</sup></td>
 </tr>
 <tr>
 <td>stockAmount</td>
 <td>string</td>
-<td>HEX of stock amount in pennies: coins count * 10^token decimal count</td>
+<td>HEX of stock amount in pennies: coins count * 10<sup>token decimal count</sup></td>
 </tr>
 <tr>
 <td>type</td>
-<td>string (buy</td>
-<td>sell)</td>
+<td>string</td>
+<td>Order type: `(buy / sell)</td>
 </tr>
 </tbody></table>
 <h2 id='order'>Order</h2><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
   <span class="nl">id</span><span class="p">:</span> <span class="s2">"123abcdef"</span><span class="p">,</span>
-  <span class="nx">cashToken</span><span class="p">:</span> <span class="p">{},</span>
-  <span class="nx">stockToken</span><span class="p">:</span> <span class="p">{},</span>
+  <span class="nx">stockTokenCode</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="nx">cashTokenCode</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="nx">type</span><span class="p">:</span> <span class="s2">"buy"</span><span class="p">,</span>
   <span class="nx">stockAmount</span><span class="p">:</span> <span class="s2">"0xde0b6b3a7640000"</span><span class="p">,</span>
   <span class="nx">cashPrice</span><span class="p">:</span> <span class="s2">"0xde0b6b3a7640000"</span><span class="p">,</span>
@@ -528,14 +541,14 @@ The body of failed response contains data required for explanation and debugging
 <td>Identificator</td>
 </tr>
 <tr>
-<td>cashToken</td>
-<td>Token</td>
-<td></td>
+<td>stockTokenCode</td>
+<td>number</td>
+<td>stock <a href="#token">Token</a>&#39;s code</td>
 </tr>
 <tr>
-<td>stockToken</td>
-<td>Token</td>
-<td></td>
+<td>cashTokenCode</td>
+<td>number</td>
+<td>cash <a href="#token">Token</a>&#39;s code</td>
 </tr>
 <tr>
 <td>type</td>
@@ -545,17 +558,17 @@ The body of failed response contains data required for explanation and debugging
 <tr>
 <td>stockAmount</td>
 <td>string</td>
-<td>HEX of stock amount in pennies: coins count * 10^token decimal count</td>
+<td>HEX of stock amount in pennies: coins count * 10<sup>token decimal count</sup></td>
 </tr>
 <tr>
 <td>cashPrice</td>
 <td>string</td>
-<td>HEX of cash price * 10^8</td>
+<td>HEX of cash price * 10<sup>8</sup></td>
 </tr>
 <tr>
 <td>fulfilledStockAmount</td>
 <td>string</td>
-<td>HEX of what ???</td>
+<td>HEX of order&#39;s amount which has been partly fullfiled already</td>
 </tr>
 <tr>
 <td>expiryDate</td>
@@ -572,9 +585,8 @@ The body of failed response contains data required for explanation and debugging
 <p>Each wallet has few fundings in several of the tokens trading on the platform. We name such a relation as a <code>Token Account</code></p>
 <pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
   <span class="nl">id</span><span class="p">:</span> <span class="s2">"123abcdef"</span><span class="p">,</span>
-  <span class="nx">token</span><span class="p">:</span> <span class="p">{},</span>
+  <span class="nx">tokenCode</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="nx">totalAmount</span><span class="p">:</span> <span class="s2">"0xde0b6b3a7640000"</span><span class="p">,</span>
-  <span class="nx">total</span><span class="o">-</span><span class="nx">amount</span><span class="p">:</span> <span class="s2">"0xde0b6b3a7640000"</span><span class="p">,</span>
   <span class="nx">onOrders</span><span class="p">:</span> <span class="s2">"0xde0b6b3a7640000"</span>
 <span class="p">}</span>
 </code></pre>
@@ -591,27 +603,26 @@ The body of failed response contains data required for explanation and debugging
 <td>Identificator</td>
 </tr>
 <tr>
-<td>token</td>
-<td>Token</td>
-<td></td>
+<td>tokenCode</td>
+<td>string</td>
+<td><a href="#token">Token</a>&#39;s code</td>
 </tr>
 <tr>
 <td>totalAmount</td>
 <td>string</td>
-<td>HEX of stock amount in pennies: coins count * 10^token decimal count</td>
+<td>HEX of stock amount in pennies: coins count * 10<sup>token decimal count</sup></td>
 </tr>
 <tr>
 <td>onOrders</td>
 <td>string</td>
-<td>HEX of on orders fund amount in pennies: coins count * 10^token decimal count</td>
+<td>HEX of on orders fund amount in pennies: coins count * 10<sup>token decimal count</sup></td>
 </tr>
 </tbody></table>
 <h2 id='funding'>Funding</h2><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
-  <span class="nl">id</span><span class="p">:</span> <span class="s2">"abc1"</span><span class="p">,</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="s2">"123abcdef"</span><span class="p">,</span>
   <span class="nx">type</span><span class="p">:</span> <span class="s2">"buy"</span><span class="p">,</span>
   <span class="nx">amount</span><span class="p">:</span> <span class="s2">"0xde0b6b3a7640000"</span><span class="p">,</span>
-  <span class="nx">token</span><span class="p">:</span> <span class="p">{},</span>
-  <span class="nx">transactionStatus</span><span class="p">:</span> <span class="p">{}</span>
+  <span class="nx">tokenCode</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre>
 <table><thead>
@@ -627,9 +638,9 @@ The body of failed response contains data required for explanation and debugging
 <td>Identificator</td>
 </tr>
 <tr>
-<td>token</td>
-<td>Token</td>
-<td></td>
+<td>tokenCode</td>
+<td>number</td>
+<td><a href="#token">Token</a>&#39;s code</td>
 </tr>
 <tr>
 <td>type</td>
@@ -639,12 +650,47 @@ The body of failed response contains data required for explanation and debugging
 <tr>
 <td>amount</td>
 <td>string</td>
-<td>HEX of stock amount in pennies: coins count * 10^token decimal count</td>
+<td>HEX of stock amount in pennies: coins count * 10<sup>token decimal count</sup></td>
 </tr>
 <tr>
 <td>transactionStatus</td>
-<td>???</td>
-<td>???</td>
+<td>object</td>
+<td><a href="#transaction-status">Transaction Status</a> model</td>
+</tr>
+</tbody></table>
+<h2 id='transaction-status'>Transaction status</h2><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="nl">state</span><span class="p">:</span> <span class="s2">"final"</span><span class="p">,</span>
+  <span class="nx">txHash</span><span class="p">:</span> <span class="s2">"0xd22b381c1dec5fdbc14dfd5a0072832728e2e36bacb1443178d62463a3ef4705"</span><span class="p">,</span>
+  <span class="nx">confirmations</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="nx">timestamp</span><span class="p">:</span> <span class="s2">"2019-02-10 15:45:00"</span>
+<span class="p">}</span>
+</code></pre>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>Transaction status: <code>(signed / pending / mined / final)</code></td>
+</tr>
+<tr>
+<td>txHash</td>
+<td>string / null</td>
+<td>Hash of transaction or null</td>
+</tr>
+<tr>
+<td>confirmations</td>
+<td>number</td>
+<td>Number of confirmations</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>string</td>
+<td>Timestamp transaction was mined at: <code>YYYY-MM-DD HH:mm:ss</code></td>
 </tr>
 </tbody></table>
 <h1 id='exchange'>Exchange</h1><h2 id='get-tokens'>Get tokens</h2>
@@ -665,7 +711,178 @@ The body of failed response contains data required for explanation and debugging
 <p>[
   <a href="#token">Token</a>, ...
 ]</p>
-<h1 id='market'>Market</h1><h2 id='get-trades'>Get trades</h2>
+<h1 id='market'>Market</h1><h2 id='put-an-order'>Put an order</h2>
+<blockquote>
+<p>CURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://staging.counter.market:8006/orders"</span>
+  -X PUT
+  -H <span class="s2">"Authorization: YOUR-AUTHORIZATION-KEY"</span>
+  -H <span class="s2">"Content-Type: application/json"</span>
+  --data <span class="s1">'{"tokenPair": {"stockTokenCode": 2, "cashTokenCode": 1}, "type": 1, "cashPriceE8": "0x2faf080", "stockAmount": "0x2540be400", "maker": "0x1234567890123456789012345678901234567890", "signature": "abc123...", tradeNonce: 22}'</span>
+</code></pre>
+<p>Puts a <code>LIMIT</code> order to market&#39;s orderbook</p>
+<h3 id='flow'>Flow</h3>
+<p>Step 1 - Provide EIP-712 signature for the following typed structure:</p>
+
+<p><code>
+types: {
+  EIP712Domain: [
+    { name: &#39;name&#39;, type: &#39;string&#39; },
+    { name: &#39;version&#39;, type: &#39;string&#39; },
+    { name: &#39;chainId&#39;, type: &#39;uint256&#39; },
+    { name: &#39;verifyingContract&#39;, type: &#39;address&#39; },
+  ],
+  Message: [
+    { name: &#39;title&#39;, type: &#39;string&#39; },
+    { name: &#39;action&#39;, type: &#39;uint256&#39; },
+    { name: &#39;priceE8&#39;, type: &#39;uint256&#39; },
+    { name: &#39;amount&#39;, type: &#39;uint256&#39; },
+    { name: &#39;makerFeeE5&#39;, type: &#39;uint256&#39; },
+    { name: &#39;takerFeeE5&#39;, type: &#39;uint256&#39; },
+    { name: &#39;stockTokenCode&#39;, type: &#39;uint256&#39; },
+    { name: &#39;cashTokenCode&#39;, type: &#39;uint256&#39; },
+    { name: &#39;expiryTime&#39; , type: &#39;uint256&#39; },
+    { name: &#39;tradeNonce&#39;, type: &#39;uint256&#39; }
+  ]
+},
+primaryType: &#39;Message&#39;,
+domain: {
+  name: &#39;counter.market&#39;,
+  version: &#39;1&#39;,
+  chainId: &#39;12345&#39;,
+  verifyingContract:</code>EXCHANGE_CONTRACT<code>address
+},
+message: {
+  title: ...,
+  action: ...,
+  priceE8: ...,
+  amount: ...,
+  makerFeeE5: ...,
+  takerFeeE5: ...,
+  stockTokenCode: ...,
+  cashTokenCode: ...,
+  expiryTime: ...,
+  tradeNonce: ...,
+}
+</code></p>
+
+<p>Here is desriptions for each of the fields:</p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>The following string <code>counter.market order:</code></td>
+</tr>
+<tr>
+<td>action</td>
+<td>uint256</td>
+<td><code>0</code> for putting <code>BUY</code> order, <code>1</code> for putting <code>SELL</code> order</td>
+</tr>
+<tr>
+<td>priceE8</td>
+<td>uint256</td>
+<td>Your price for <code>stock</code> funds in <code>cash</code> * 10<sup>8</sup></td>
+</tr>
+<tr>
+<td>amount</td>
+<td>uint256</td>
+<td>Amount of <code>stock</code> funds in <code>pennies</code></td>
+</tr>
+<tr>
+<td>makerFeeE5</td>
+<td>uint256</td>
+<td>The vallue of <code>MAKER_FEE</code> * 10<sup>3</sup> in HEX</td>
+</tr>
+<tr>
+<td>takerFeeE5</td>
+<td>uint256</td>
+<td>The vallue of <code>TAKER_FEE</code> * 10<sup>3</sup> in HEX</td>
+</tr>
+<tr>
+<td>stockTokenCode</td>
+<td>uint256</td>
+<td>stock <a href="#token">Token</a>&#39;s code</td>
+</tr>
+<tr>
+<td>cashTokenCode</td>
+<td>uint256</td>
+<td>cash <a href="#token">Token</a>&#39;s code</td>
+</tr>
+<tr>
+<td>expiryTime</td>
+<td>uint256</td>
+<td>Unix timestamp of order&#39;s expiration</td>
+</tr>
+<tr>
+<td>tradeNonce</td>
+<td>uint256</td>
+<td>wallet&#39;s <code>nonce</code> for <code>trade</code> operation</td>
+</tr>
+</tbody></table>
+
+<p>Step 2 - Make an API call</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>PUT http://staging.counter.market:8006/orders</code></p>
+<h3 id='body-json-parameters'>Body JSON Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>tokenPair.stockTokenCode</td>
+<td>number</td>
+<td>Code of the stock token</td>
+</tr>
+<tr>
+<td>tokenPair.cashTokenCode</td>
+<td>number</td>
+<td>Code of the cash token</td>
+</tr>
+<tr>
+<td>type</td>
+<td>number</td>
+<td><code>0</code> for putting <code>BUY</code> order, <code>1</code> for putting <code>SELL</code> order</td>
+</tr>
+<tr>
+<td>cashPriceE8</td>
+<td>string</td>
+<td>Your price for <code>stock</code> funds in <code>cash</code> * 10<sup>8</sup></td>
+</tr>
+<tr>
+<td>stockAmount</td>
+<td>string</td>
+<td>Amount of <code>stock</code> funds in <code>pennies</code></td>
+</tr>
+<tr>
+<td>maker</td>
+<td>string</td>
+<td>Ethereum address of your wallet to trade from</td>
+</tr>
+<tr>
+<td>signature</td>
+<td>number</td>
+<td>Ethereum <code>EIP-712</code> signature (from step 1)</td>
+</tr>
+<tr>
+<td>tradeNonce</td>
+<td>string</td>
+<td>wallet&#39;s <code>nonce</code> for <code>trade</code> operation</td>
+</tr>
+</tbody></table>
+<h3 id='server-response'>Server response</h3>
+<p>Empty response</p>
+<h2 id='get-trades'>Get trades</h2>
 <blockquote>
 <p>CURL</p>
 </blockquote>
@@ -675,13 +892,14 @@ The body of failed response contains data required for explanation and debugging
   -H <span class="s2">"Content-Type: application/json"</span>
 </code></pre>
 <p>This endpoint returns market&#39;s trades</p>
-<h3 id='http-request'>HTTP Request</h3>
+<h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET http://staging.counter.market:8006/market/&lt;StockTokenSymbol&gt;/&lt;CashTokenSymbol&gt;/trades</code></p>
 <h3 id='http-json-response'>HTTP JSON Response</h3>
 <p>List of <a href="#trade">Trade</a>s:</p>
 
 <p>[
-  <a href="#trade">Trade</a>, ...
+  items: [ <a href="#trade">Trade</a>, ... ],
+  total: TOTAL_NUMBER_OF_TRADES
 ]</p>
 <h2 id='get-orderbook'>Get orderbook</h2>
 <blockquote>
@@ -693,7 +911,7 @@ The body of failed response contains data required for explanation and debugging
   -H <span class="s2">"Content-Type: application/json"</span>
 </code></pre>
 <p>This endpoint returns current orderbook of the market.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
+<h3 id='http-request-3'>HTTP Request</h3>
 <p><code>GET http://staging.counter.market:8006/market/&lt;StockTokenSymbol&gt;/&lt;CashTokenSymbol&gt;/orderbook/&lt;OrderType&gt;</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
@@ -724,7 +942,7 @@ The body of failed response contains data required for explanation and debugging
   --data <span class="s1">'{"signature": "abcdef123123}'</span>
 </code></pre>
 <p>This endpoint cancels order</p>
-<h3 id='http-request-3'>HTTP Request</h3>
+<h3 id='http-request-4'>HTTP Request</h3>
 <p><code>DELETE http://staging.counter.market:8006/orders/&lt;OrderId&gt;</code></p>
 <h3 id='url-parameters-2'>URL Parameters</h3>
 <table><thead>
@@ -738,7 +956,7 @@ The body of failed response contains data required for explanation and debugging
 <td>Order&#39;s identificator</td>
 </tr>
 </tbody></table>
-<h3 id='body-json-parameters'>Body JSON Parameters</h3>
+<h3 id='body-json-parameters-2'>Body JSON Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -779,9 +997,10 @@ The body of failed response contains data required for explanation and debugging
 <h3 id='server-response'>Server response</h3>
 <p>List of <a href="#order">Order</a>s:</p>
 
-<p>[
-  <a href="#order">Order</a>, ...
-]</p>
+<p>{
+  items: [ <a href="#order">Order</a>, ... ],
+  total: TOTAL_NUMBER_OF_TOTALS
+}</p>
 <h2 id='get-all-token-accounts'>Get all token accounts</h2>
 <blockquote>
 <p>CURL</p>
@@ -815,9 +1034,10 @@ The body of failed response contains data required for explanation and debugging
 <h3 id='server-response-3'>Server response</h3>
 <p>List of <a href="#trade">Trade</a>&#39;s for a binded wallet with given <code>&lt;ETHAddress&gt;</code>:</p>
 
-<p>[
-  <a href="#trade">Trade</a>, ...
-]</p>
+<p>{
+  items: [ <a href="#trade">Trade</a>, ... ],
+  total: TOTAL_NUMBER_OF_TRADES
+}</p>
 <h2 id='get-nonces'>Get nonces</h2>
 <p>This endpoint returns exchange operation nonces for given <code>&lt;ETHAddress&gt;</code> wallet</p>
 
@@ -828,18 +1048,24 @@ The body of failed response contains data required for explanation and debugging
   -X GET
   -H <span class="s2">"Authorization: YOUR-AUTHORIZATION-KEY"</span>
   -H <span class="s2">"Content-Type: application/json"</span>
+</code></pre>
+<blockquote>
+<p>RESPONSE</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="nl">trade</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span>
+  <span class="nx">withdraw</span><span class="p">:</span> <span class="mi">12</span>
+<span class="p">}</span>
 </code></pre><h3 id='http-request-4'>HTTP Request</h3>
 <p><code>GET http://staging.counter.market:8006/wallets/&lt;ETHAddress&gt;/nonces</code></p>
 <h3 id='server-response-4'>Server response</h3>
 <p>Dictionary of ETH transaction nonces for each of the exchange operations: <code>trade</code>, <code>withdraw</code>:</p>
 
 <p><code>
-[
-  {
-    trade: 12,
-    witdraw: 22,
-  }
-]
+{
+  trade: NONCE_FOR_TRADE_OPERATION,
+  witdraw: NONCE_FOR_WITHDRAW_OPERATION,
+}
 </code></p>
 <h2 id='deposit'>Deposit</h2>
 <blockquote>
@@ -852,14 +1078,10 @@ The body of failed response contains data required for explanation and debugging
   --data <span class="s1">'{"tokenCode": 2, "amount": "0xA", "txHash": "0x123"}'</span>
 </code></pre>
 <p>Deposit funds to <code>&lt;ETHAddress&gt;</code> wallet</p>
-<h3 id='flow'>Flow</h3>
-<p>For depositing <code>ETH</code>:</p>
-
-<ul>
-<li>Invoke <code>depositEther</code> method of <code>TREASURY</code> smart contract by sending transaction from corresponding ethereum account.
-Set transaction value equal to amount of <code>ETH</code> you wanna to deposit.
-Refer to smart contract method&#39;s arguments:</li>
-</ul>
+<h3 id='depositing-eth'>Depositing <code>ETH</code>:</h3>
+<p>Step 1 - Invoke <code>depositEther</code> method of <code>TREASURY</code> smart contract by sending transaction from corresponding ethereum account.
+  Set transaction value equal to amount of <code>ETH</code> you wanna to deposit.
+  Refer to smart contract method&#39;s arguments:</p>
 
 <table><thead>
 <tr>
@@ -875,27 +1097,41 @@ Refer to smart contract method&#39;s arguments:</li>
 </tr>
 </tbody></table>
 
-<p>NOTE: This transaction&#39;s hash will be used lately as parameter to an API call.</p>
+<p><aside class="notice">
+    NOTE: This transaction&#39;s hash will be used lately as parameter to an API call.
+  </aside></p>
 
-<ul>
-<li>Make an API call</li>
-</ul>
+<p>Step 2 - Make an API call</p>
+<h3 id='depositing-erc-20-tokens'>Depositing <code>ERC-20</code> tokens:</h3>
+<p>Step 1 - Invoke <code>approve</code> method of <code>ERC-20</code> token&#39;s smart contract to grant <code>TREASURY</code> smart contract to operate with allowed amount of your <code>ERC-20</code> tokens from your behalf.
+  Use <a href="#token">Token</a>&#39;s <code>contractAddress</code> as a receiver address for this transaction.</p>
 
-<p>For depositing <code>ERC-20</code> tokens:</p>
+<p>Step 2 - Invoke <code>depositERC20Token</code> method of <code>TREASURY</code> smart contract with the following arguments:</p>
 
-<ul>
-<li><p>Send a transaction to allow <code>TREASURY</code> smart contract to operate with desired amount of your <code>ERC-20</code> tokens.
-Use <a href="#token">Token</a>&#39;s <code>contractAddress</code> as a receiver address for this transaction.</p></li>
-<li><p>Invoke <code>depositERC20Token</code> method of <code>TREASURY</code> smart contract with the following arguments:</p></li>
-</ul>
+<table><thead>
+<tr>
+<th>Argument number</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>0</td>
+<td>string</td>
+<td><a href="#token-account">Token Account</a> id</td>
+</tr>
+<tr>
+<td>1</td>
+<td>string</td>
+<td>HEX of token amount to deposit in <code>pennies</code></td>
+</tr>
+</tbody></table>
 
-<p>Argument number | Type | Description
-0 | string | <a href="#token-account">Token Account</a> id
-1 | string | HEX of token amount to deposit in <code>pennies</code></p>
+<p><aside class="notice">
+    NOTE: This transaction&#39;s hash will be used lately as parameter to an API call.
+  </aside></p>
 
-<ul>
-<li>Make an API call</li>
-</ul>
+<p>Step 3 - Make an API call</p>
 <h3 id='http-request-5'>HTTP Request</h3>
 <p><code>PUT http://staging.counter.market:8006/wallets/&lt;ETHAddress&gt;/deposits</code></p>
 <h3 id='body-json-parameters'>Body JSON Parameters</h3>
@@ -932,13 +1168,11 @@ Use <a href="#token">Token</a>&#39;s <code>contractAddress</code> as a receiver 
   -X PUT
   -H <span class="s2">"Authorization: YOUR-AUTHORIZATION-KEY"</span>
   -H <span class="s2">"Content-Type: application/json"</span>
-  --data <span class="s1">'{"tokenCode": 2, "amount": "0xA", "withdrawAddress": "0x123", "withdrawNonce": 10, "txHash": "0x123"}'</span>
+  --data <span class="s1">'{"tokenCode": 2, "amount": "0xA", "withdrawAddress": "0x123", "withdrawNonce": 10, "signature": "0x123"}'</span>
 </code></pre>
 <p>Withdraw funds from <code>&lt;ETHAddress&gt;</code> wallet</p>
-<h3 id='flow-2'>Flow</h3>
-<ul>
-<li>Sign following structure with wallet&#39;s ethereum address you wanna to withdraw funds from</li>
-</ul>
+<h3 id='flow'>Flow</h3>
+<p>Step 1 - Sign following structure with wallet&#39;s ethereum address you wanna to withdraw funds from</p>
 
 <table><thead>
 <tr>
@@ -949,8 +1183,8 @@ Use <a href="#token">Token</a>&#39;s <code>contractAddress</code> as a receiver 
 </thead><tbody>
 <tr>
 <td>tokenCode</td>
-<td>uint16</td>
-<td>Token code</td>
+<td>uint256</td>
+<td><a href="#token">Token</a> code</td>
 </tr>
 <tr>
 <td>withdrawAddress</td>
@@ -959,19 +1193,22 @@ Use <a href="#token">Token</a>&#39;s <code>contractAddress</code> as a receiver 
 </tr>
 <tr>
 <td>amount</td>
-<td>uint128</td>
-<td>Amount of funds to withdraw</td>
+<td>uint256</td>
+<td>Amount of funds (in <code>pennies</code>) to withdraw in HEX</td>
+</tr>
+<tr>
+<td>withdrawFeeE5</td>
+<td>uint256</td>
+<td>The vallue of <code>WITHDRAWAL_FEE</code> * 10<sup>3</sup> in HEX</td>
 </tr>
 <tr>
 <td>withdrawNonce</td>
-<td>uint64</td>
+<td>uint256</td>
 <td>wallet&#39;s <code>nonce</code> for <code>withdraw</code> operation</td>
 </tr>
 </tbody></table>
 
-<ul>
-<li>Make an API call</li>
-</ul>
+<p>Step 2 - Make an API call</p>
 <h3 id='http-request-6'>HTTP Request</h3>
 <p><code>PUT http://staging.counter.market:8006/wallets/&lt;ETHAddress&gt;/withdrawals</code></p>
 <h3 id='body-json-parameters-2'>Body JSON Parameters</h3>
@@ -998,6 +1235,11 @@ Use <a href="#token">Token</a>&#39;s <code>contractAddress</code> as a receiver 
 <td>ETH address to withdraw to</td>
 </tr>
 <tr>
+<td>withdrawFeeE5</td>
+<td>string</td>
+<td>The vallue of <code>WITHDRAWAL_FEE</code> * 10<sup>3</sup> in HEX</td>
+</tr>
+<tr>
 <td>withdrawNonce</td>
 <td>number</td>
 <td>wallet&#39;s <code>nonce</code> for <code>withdraw</code> operation</td>
@@ -1005,7 +1247,7 @@ Use <a href="#token">Token</a>&#39;s <code>contractAddress</code> as a receiver 
 <tr>
 <td>signature</td>
 <td>string</td>
-<td>Ethereum signature</td>
+<td>Ethereum signature (from step 1)</td>
 </tr>
 </tbody></table>
 <h3 id='server-response-6'>Server response</h3>
@@ -1025,9 +1267,12 @@ Use <a href="#token">Token</a>&#39;s <code>contractAddress</code> as a receiver 
 <h3 id='server-response-7'>Server response</h3>
 <p>List of <a href="#funding">Funding</a>s of the wallet binded to <code>&lt;ETHAddress&gt;</code>:</p>
 
-<p>[
-  <a href="#funding">Funding</a>, ...
-]</p>
+<p><code>
+{
+  items: [ <a href="#funding">Funding</a>, ... ],
+  total: TOTAL_NUMER_OF_FUNDINGS
+}
+</code></p>
 
       </div>
       <div class="dark-box">

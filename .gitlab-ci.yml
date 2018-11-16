@@ -1,8 +1,12 @@
+image: alpine:latest
+
 pages:
-  only:
-  - master
+  stage: deploy
   script:
-  - echo 'no steps required since we store build in repo'
+    - mkdir public
+    - mv build/* public
   artifacts:
     paths:
-    - build
+      - public
+  only:
+    - master

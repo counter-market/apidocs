@@ -58,25 +58,25 @@ Market's orderbook entity. Stock amount is equal to sum of all order's volumes o
 
 ```javascript
 {
-  minCashPriceE8: "0xde0b6b3a7640000",
-  maxCashPriceE8: "0xde0b6b3a7640000",
+  cashPriceE8: "0xde0b6b3a7640000",
   stockAmount: "0xde0b6b3a7640000",
+  cashAmount: "0xde0b6b3a7640000",
   type: "buy"
 }
 ```
 
 Attribute | Type | Description
 --------- | ---- | -----------
-minCashPriceE8 | string | HEX of `min` value of cash price range * 10<sup>8</sup>
-maxCashPriceE8 | string | HEX of `max` value of cash price range * 10<sup>8</sup>
+cashPriceE8 | string | HEX of threshold value of cash price range * 10<sup>8</sup>
 stockAmount | string | HEX of stock amount in pennies: coins count * 10<sup>token decimal count</sup>
+cashAmount | string | HEX of cash sum in current price range in pennies: coins count * 10<sup>token decimal count</sup>
 type | string | Order type: `(buy / sell)
 
 ## Order
 
 ```javascript
 {
-  id: "123abcdef",
+  uniqueId: "123abcdef",
   stockTokenCode: 2,
   cashTokenCode: 1,
   type: "buy",
@@ -91,12 +91,12 @@ type | string | Order type: `(buy / sell)
 
 Attribute | Type | Description
 --------- | ---- | -----------
-id | string | Identificator
+uniqueId | string | Identificator
 stockTokenCode | number | stock [Token](#token)'s code
 cashTokenCode | number | cash [Token](#token)'s code
 type | string | Order type: `buy / sell`
 stockAmount | string | HEX of stock amount in pennies: coins count * 10<sup>token decimal count</sup>
-cashPrice | string | HEX of cash price * 10<sup>8</sup>
+cashPriceE8 | string | HEX of cash price in pennies: price * 10<sup>8</sup>
 fulfilledStockAmount | string | HEX of order's amount which has been partly fullfiled already
 expiryDate | string | Expiry date: `YYYY-MM-DD HH:mm:ss`
 createdAt | string | Creation timestamp: `YYYY-MM-DD HH:mm:ss`
@@ -138,7 +138,7 @@ id | string | Identificator
 tokenCode | number | [Token](#token)'s code
 type | string | Order type: `buy / sell`
 amount | string | HEX of stock amount in pennies: coins count * 10<sup>token decimal count</sup>
-transactionStatus | object | [Transaction Status](#transaction-status) model
+status | object | [Transaction Status](#transaction-status) model
 
 ## Transaction status
 
@@ -157,3 +157,45 @@ state | string | Transaction status: `(signed / pending / mined / final)`
 txHash | string / null | Hash of transaction or null
 confirmations | number | Number of confirmations
 timestamp | string | Timestamp transaction was mined at: `YYYY-MM-DD HH:mm:ss`
+
+## OHLCV
+
+```javascript
+{
+  time: 1543219658000,
+  open: "2.16",
+  high: "2.16",
+  low: "2.13",
+  close: "2.13",
+  volume: "2600"
+}
+```
+
+Attribute | Type | Description
+--------- | ---- | -----------
+time | number | Time frame timestamp as unix in ms
+open | string | Open price
+high | string | High price
+low | string | Low price
+close | string | Close price
+volume | string | Trade volume
+
+## Exchange rate
+
+```javascript
+{
+  id: "1/0",
+  fromTokenCode: "1",
+  toTokenCode: "0",
+  value: "0xcebc200",
+  timestamp: "2018-11-25 16:31:20"
+}
+```
+
+Attribute | Type | Description
+--------- | ---- | -----------
+id | string | Identificator
+fromTokenCode | string | Code of converted [Token](#token)
+toTokenCode | string | Code of conversion [Token](#token)
+value | string | HEX of conversion rate multiplied by 10<sup>8</sup>
+timestamp | string | Timestamp

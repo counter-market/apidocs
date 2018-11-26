@@ -18,7 +18,7 @@ Puts a `LIMIT` order to market's orderbook
 
 Step 1 - Provide EIP-712 signature for the following typed structure:
 
-`
+<pre class="leftpane_code">
 types: {
   EIP712Domain: [
     { name: 'name', type: 'string' },
@@ -58,7 +58,7 @@ message: {
   expiryTime: ...,
   tradeNonce: ...,
 }
-`
+</pre>
 
 Here is desriptions for each of the fields:
 
@@ -103,7 +103,7 @@ Empty response
 > CURL
 
 ```shell
-curl "<%= data.urls.arbiter %>/market/DAI/ETH/trades"
+curl "<%= data.urls.ts %>/market/DAI/ETH/trades"
   -X GET
   -H "Authorization: YOUR-AUTHORIZATION-KEY"
   -H "Content-Type: application/json"
@@ -113,7 +113,7 @@ This endpoint returns market's trades
 
 ### HTTP Request
 
-`GET <%= data.urls.arbiter %>/market/<StockTokenSymbol>/<CashTokenSymbol>/trades`
+`GET <%= data.urls.ts %>/market/<StockTokenSymbol>/<CashTokenSymbol>/trades`
 
 ### HTTP JSON Response
 
@@ -188,3 +188,35 @@ signature | ETH EIP712 signature
 ### HTTP JSON Response
 
 Empty object
+
+## Getting OHLCV
+
+> CURL
+
+```shell
+curl "<%= data.urls.ts %>/markets/DAI/ETH/ohlcv?since=1543219645&till=1543219645&step=60"
+  -X GET
+  -H "Authorization: YOUR-AUTHORIZATION-KEY"
+  -H "Content-Type: application/json"
+```
+
+This endpoint cancels order
+
+### HTTP Request
+
+`GET <%= data.urls.ts %>/markets/<StockTokenSymbol>/<CashTokenSymbol>/ohlcv?since=<Since>&till=<Till>&step=<Step>`
+
+### Query Parameters
+
+Parameter | Type | Description
+--------- | ---- | -----------
+Since | number | left border of time frame as unix timestamp
+Till | number | right border of time frame as unix timestamp
+Step | number | step granularity in seconds
+
+### HTTP JSON Response
+
+{
+  items: List of [OHLCV](#ohlcv),
+  nextTime: timestamp of next trade
+}

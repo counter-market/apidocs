@@ -57,12 +57,12 @@ List of [Token Account](#token-account)s for a binded `<ETHAddress>` wallet:
   [Token Account](#token-account), ...
 ]
 
-## Get all trades
+## Get trades
 
 > CURL
 
 ```shell
-curl "<%= data.urls.arbiter %>/wallets/0x1234567890123456789012345678901234567890/trades"
+curl "<%= data.urls.ts %>/wallets/0x1234567890123456789012345678901234567890/trades"
   -X GET
   -H "Authorization: YOUR-AUTHORIZATION-KEY"
   -H "Content-Type: application/json"
@@ -72,7 +72,7 @@ This endpoint returns the list of [Trade](#trade)s of `<ETHAddress>` wallet
 
 ### HTTP Request
 
-`GET <%= data.urls.arbiter %>/wallets/<ETHAddress>/trades`
+`GET <%= data.urls.ts %>/wallets/<ETHAddress>/trades`
 
 ### Server response
 

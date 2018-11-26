@@ -24,3 +24,28 @@ List of [Token](#token)s:
 [
   [Token](#token), ...
 ]
+
+## Get exchange rates
+
+> CURL
+
+```shell
+curl "<%= data.urls.ts %>/exchange-rates"
+  -X GET
+  -H "Authorization: YOUR-AUTHORIZATION-KEY"
+  -H "Content-Type: application/json"
+```
+
+This endpoint returns all exchange rates for every trading token pair.
+
+### HTTP Request
+
+`GET <%= data.urls.ts %>/exchange-rates`
+
+### HTTP JSON Response
+
+List of [Exchange rate](#exchange-rate)s:
+
+[
+  items: [ [Exchange rate](#exchange-rate), ... ]
+]

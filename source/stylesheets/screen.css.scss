@@ -3,6 +3,7 @@
 @import 'variables';
 @import 'icon-font';
 // @import 'rtl'; // uncomment to switch to RTL format
+@import 'custom';
 
 /*
 Copyright 2008-2013 Concur Technologies, Inc.
@@ -76,6 +77,8 @@ html, body {
     display: block;
     max-width: 100%;
     margin-bottom: $logo-margin;
+    width: 80%;
+    padding: 10px 10%;
   }
 
   &>.search {
